@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+spring:
+  application.name: backend-resources
+  # the current backend is configured to be used as a resource server
+  # then, I must indicate the URI of the backend-auth to be used and which token to be used
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/my_realm
+
+keycloak:
+  realm: my_realm
+  auth-server-url: http://localhost:8080/auth
+  resource: my_client
+

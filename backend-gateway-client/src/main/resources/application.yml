@@ -1,0 +1,27 @@
+server:
+  port: 8083
+
+spring:
+  application.name: backend-gateway-client
+  cloud:
+    gateway:
+      routes:
+        - id: resources
+          uri: http://localhost:8082/messages
+          predicates:
+            Path=/messages/**
+          filters:
+            TokenRelay=
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: my-provider
+            client-id: my_client
+            client-secret: TS8ttYQr7FGmpkg3t0tYzqPbqcXpgRQj
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          my-provider:
+            issuer-uri: http://localhost:8080/auth/realms/my_realm
